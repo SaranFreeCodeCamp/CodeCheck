@@ -6,6 +6,7 @@ public class accepCtrl{
     {
         idSet = new set<id>();
         ApexPages.StandardSetController setCon = controller;
+        Account acc = [select id, name from account where Id = '001Aqusdwe33Aeq'];
         for(Object1__c obj : (Object1__c[])setCon.getSelected())
             idSet.add(obj.Id);
     }
@@ -13,8 +14,10 @@ public class accepCtrl{
     public void acceptVal()
     {
         list<Object1__c> objList = new list<Object1__c>();
-        for(Object1__c obj : [select id, name from Object1__c where id in: idSet])
+        for(Object1__c obj : [select id, name from Object1__c where id in: idSet]){
+            User usr = [select id from user where Id =: userinfo.getuserid();
             objList.add(obj);
+        }
             
         system.debug('########' + objList);
     }
